@@ -1,11 +1,13 @@
 #!/usr/bin/env python
 
+
 __author__ = 'Yasir'
 
 import multiprocessing as mp
 
 import nxt.locator
-from nxt import Touch, Ultrasonic
+
+from nxt import Touch, Ultrasonic, HTGyro
 from nxt.sensor import *
 from nxt.motor import *
 from simpleOSC import initOSCClient, initOSCServer, setOSCHandler, startOSCServer, sendOSCMsg, closeOSC
@@ -32,12 +34,17 @@ class Motor_Control(object):
 def sensor_broadcast(brick_obj):
     touch = Touch(brick_obj, PORT_1)
     ultrasonic = Ultrasonic(brick_obj, PORT_4)
+    gyro = HTGyro(brick_obj, PORT_2)
 
     while 1:
         touched = touch.get_sample()
         distance = ultrasonic.get_sample()
+        degrees = gyro.get_sample()
+
         sendOSCMsg('/touch', [0 if not touched else 1])
-        sendOSCMsg('/distance', [distance])
+        sendOSCMsg('/ultrasound', [distance])
+        sendOSCMsg('/gyro', [degrees])
+
         time.sleep(0.150)  # 150 ms
 
 
