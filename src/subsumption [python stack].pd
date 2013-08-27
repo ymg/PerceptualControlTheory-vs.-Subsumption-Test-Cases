@@ -1,4 +1,4 @@
-#N canvas 456 0 659 615 12;
+#N canvas 210 1 659 615 12;
 #X declare -lib mrpeach;
 #X obj -17 18 import mrpeach;
 #X obj 213 77 dumpOSC 9000;
@@ -34,19 +34,19 @@
 #X msg 222 471 0 0;
 #X msg 203 418 -63 -45;
 #X text -4 525 [Layer 0];
-#N canvas 875 7 1012 614 Circle 0;
+#N canvas 889 2 1012 614 Circle 0;
 #X obj 59 21 inlet;
 #X obj 706 32 inlet;
 #X obj 464 573 outlet;
 #X floatatom 380 174 10 0 0 0 - - -;
 #X msg 706 192 \$1;
 #X obj 706 129 spigot;
-#X obj 745 106 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 2873
+#X obj 745 106 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
 2873;
 #X floatatom 706 164 10 0 0 0 - - -;
 #X obj 380 218 expr $f1 \; $f2 \; if ($f1 >= $f2 - 34 && $f1 <= $f2
 + 34 \, $f1 \, 1);
-#X obj 706 295 value calculated speed;
+#X obj 706 283 value calculated speed;
 #X floatatom 59 231 10 0 0 0 - - -;
 #X obj 668 118 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -58,10 +58,10 @@
 #X msg 59 139 \$1;
 #X obj 269 452 spigot;
 #X obj 308 409 tgl 15 0 /motors empty empty 17 7 0 10 -262144 -1 -1
-0 59;
-#X msg 59 273 send /motors 63 \$1;
-#X obj 308 12 inlet;
-#X text 333 406 <-- if not suppressed \, keep controlling;
+22 22;
+#X msg 59 270 send /motors 63 \$1;
+#X text 333 406 <-- if not inhibited \, keep controlling;
+#X obj 308 21 inlet;
 #X connect 0 0 15 0;
 #X connect 1 0 5 0;
 #X connect 1 0 3 0;
@@ -81,10 +81,11 @@
 #X connect 16 0 13 0;
 #X connect 17 0 2 0;
 #X connect 18 0 17 1;
+#X connect 18 0 15 0;
 #X connect 19 0 17 0;
-#X connect 20 0 18 0;
+#X connect 21 0 18 0;
 #X restore 256 263 pd Circle Motion;
-#N canvas -1 0 455 903 Avoidance 0;
+#N canvas 410 0 455 903 Avoidance 0;
 #X obj -7367 20 inlet;
 #X obj -7367 20 inlet;
 #X floatatom -7367 266 5 0 0 0 - - -;
@@ -102,13 +103,13 @@
 #X msg -7410 577 send /motors 0 0;
 #X obj -7225 340 delay 1000;
 #X msg -7161 615 send /motors 0 35;
-#X obj -7257 20 inlet;
+#X obj -7258 18 inlet;
 #X text -7189 96 <-- Suppression point;
 #X floatatom -7367 60 5 0 0 0 - - -;
 #X obj -7367 99 moses 1;
 #X msg -7190 489 send /motors 0 0;
 #X obj -7174 843 outlet;
-#X obj -7257 97 moses 61;
+#X obj -7258 95 moses 22;
 #X connect 0 0 17 0;
 #X connect 2 0 7 0;
 #X connect 3 0 4 0;
@@ -139,24 +140,31 @@
 #X obj 365 174 unpack i;
 #X text 406 6 Subsumption case study v0.3;
 #X text 376 262 <-- [Layer 2] Drive in circles;
-#X msg 222 444 63 -45;
 #X obj 213 104 OSCroute /touch /ultrasound /gyro;
-#X msg 116 227 65;
-#X msg 157 268 60;
-#X msg 166 219 59;
-#X connect 1 0 19 0;
+#X msg 454 357 65;
+#X msg 454 382 60;
+#X msg 453 332 59;
+#X obj 244 225 print;
+#X msg 222 444 63 63;
+#X obj 90 174 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
+-1;
+#X text 4 173 Start robot;
+#X connect 1 0 18 0;
 #X connect 3 0 13 1;
+#X connect 4 0 13 2;
 #X connect 6 0 5 0;
 #X connect 7 0 5 1;
 #X connect 9 0 5 3;
 #X connect 10 0 5 3;
+#X connect 12 0 5 2;
 #X connect 13 0 5 2;
 #X connect 13 1 12 1;
 #X connect 15 0 12 2;
-#X connect 18 0 5 3;
-#X connect 19 0 3 0;
-#X connect 19 1 4 0;
-#X connect 19 2 15 0;
+#X connect 18 0 3 0;
+#X connect 18 1 4 0;
+#X connect 18 2 15 0;
+#X connect 19 0 13 2;
 #X connect 20 0 13 2;
 #X connect 21 0 13 2;
-#X connect 22 0 13 2;
+#X connect 23 0 5 3;
+#X connect 24 0 12 0;

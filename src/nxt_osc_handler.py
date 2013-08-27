@@ -45,7 +45,7 @@ def sensor_broadcast(brick_obj):
         sendOSCMsg('/ultrasound', [distance])
         sendOSCMsg('/gyro', [degrees])
 
-        time.sleep(0.150)  # 150 ms
+        time.sleep(0.50)  # 50 ms
 
 
 if __name__ == '__main__':
