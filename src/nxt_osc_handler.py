@@ -41,9 +41,6 @@ def sensor_broadcast(Control_Object):
 
         sendOSCMsg('/motor_state', [Control_Object.m_right._get_state().power,
                                     Control_Object.m_left._get_state().power])
-
-        print distance
-
         sendOSCMsg('/ultrasound', [distance])
         sendOSCMsg('/gyro', [degrees])
 
