@@ -4,7 +4,7 @@
     <list default="true" id="6cbb2c52-d0a0-47cb-a0ea-4477bcfb2697" name="Default" comment="" />
     <ignored path="src.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/nxt_osc_handler.py" changelist="6cbb2c52-d0a0-47cb-a0ea-4477bcfb2697" time="1379027857383" ignored="false" />
+    <file path="/nxt_osc_handler.py" changelist="6cbb2c52-d0a0-47cb-a0ea-4477bcfb2697" time="1379898186380" ignored="false" />
     <file path="/Python Console" changelist="6cbb2c52-d0a0-47cb-a0ea-4477bcfb2697" time="1377996707941" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +28,7 @@
       <file leaf-file-name="nxt_osc_handler.py" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/nxt_osc_handler.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="49" column="26" selection-start="1350" selection-end="1350" vertical-scroll-proportion="0.6086956">
+            <state line="52" column="31" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.32608697">
               <folding>
                 <element signature="e#45#73#0" expanded="true" />
               </folding>
@@ -124,12 +124,12 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="vcs.Git" />
+    <property name="recentsLimit" value="5" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../../../PyCharmProjects" />
     <property name="FullScreen" value="false" />
-    <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
+    <property name="options.splitter.details.proportions" value="0.2" />
   </component>
   <component name="PyConsoleOptionsProvider">
     <option name="myPythonConsoleState">
@@ -241,7 +241,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.41222224" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15368196" sideWeight="0.56777775" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16168623" sideWeight="0.56777775" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.48333332" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32850778" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
@@ -315,7 +315,7 @@
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="7" />
+      <option name="time" value="12" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
@@ -394,11 +394,6 @@
         <state line="34" column="79" selection-start="1251" selection-end="1251" vertical-scroll-proportion="0.4633867" />
       </provider>
     </entry>
-    <entry file="file://C:/Python27/Lib/site-packages/nxt/locator.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="136" column="0" selection-start="5676" selection-end="5676" vertical-scroll-proportion="0.16704805" />
-      </provider>
-    </entry>
     <entry file="file://C:/Python27/Lib/site-packages/nxt/sensor/common.py">
       <provider selected="true" editor-type-id="text-editor">
         <state line="12" column="46" selection-start="662" selection-end="662" vertical-scroll-proportion="0.24599542" />
@@ -414,9 +409,14 @@
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
+    <entry file="file://C:/Python27/Lib/site-packages/nxt/locator.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="136" column="0" selection-start="5676" selection-end="5676" vertical-scroll-proportion="0.33257404" />
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/nxt_osc_handler.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="49" column="26" selection-start="1350" selection-end="1350" vertical-scroll-proportion="0.6086956">
+        <state line="52" column="31" selection-start="1427" selection-end="1427" vertical-scroll-proportion="0.32608697">
           <folding>
             <element signature="e#45#73#0" expanded="true" />
           </folding>

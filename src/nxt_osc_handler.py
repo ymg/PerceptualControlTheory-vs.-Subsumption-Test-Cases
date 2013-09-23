@@ -9,7 +9,7 @@ import nxt.locator
 from nxt.sensor import *
 from nxt.motor import *
 from simpleOSC import initOSCClient, initOSCServer, setOSCHandler, \
-    startOSCServer, sendOSCMsg
+    startOSCServer, sendOSCMsg, closeOSC
 
 
 class Motor_Control(object):
@@ -33,19 +33,20 @@ class Motor_Control(object):
 # OSC server function, forwards all required values to PureData OSC client
 def sensor_broadcast(Control_Object):
     ultrasonic = Ultrasonic(Control_Object.nxt_obj, PORT_4)
-    gyro = HTGyro(Control_Object.nxt_obj, PORT_2)
 
     while 1:
         distance = ultrasonic.get_distance()
-        degrees = gyro.get_sample()
-
         sendOSCMsg('/motor_state', [Control_Object.m_right._get_state().power,
                                     Control_Object.m_left._get_state().power])
+        # print distance
         sendOSCMsg('/ultrasound', [distance])
-        sendOSCMsg('/gyro', [degrees])
-
         time.sleep(0.10)  # 10 ms
 
+
+def shutdown(pl):
+    input("Press any key to close OSC server")
+    closeOSC()
+    pl.terminate()
 
 if __name__ == '__main__':
     b = nxt.locator.find_one_brick()
@@ -65,7 +66,13 @@ if __name__ == '__main__':
 
     # starting the sensor broadcast in parallel
     pool = mp.Pool()
-    foo = sensor_broadcast(controls)
-    pool.apply_async(foo)
+    #pool.apply_async(shutdown(pool))
+    pool.apply_async(sensor_broadcast(controls))
     pool.close()
     pool.join()
+    # server = sensor_broadcast(controls)
+    # procOSC = mp.Process(server)
+    # procOSC.start()
+
+    # input("Press any key to close OSC server")
+    # closeOSC()
