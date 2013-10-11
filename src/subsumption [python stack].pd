@@ -1,10 +1,9 @@
-#N canvas 39 16 634 615 12;
+#N canvas 1251 13 627 602 12;
 #X declare -lib mrpeach;
-#X obj 14 14 import mrpeach;
-#X obj 234 85 dumpOSC 9000;
-#X obj 127 14 OSC;
-#X obj 234 144 unpack i;
-#X obj 310 158 unpack i;
+#X obj 23 1 import mrpeach;
+#X obj 159 52 dumpOSC 9000;
+#X obj 136 2 OSC;
+#X obj 159 111 unpack i;
 #N canvas 771 326 535 551 RobotControl 0;
 #X obj -7984 18 inlet;
 #X obj -7607 16 inlet;
@@ -12,19 +11,21 @@
 #X msg -7790 217 disconnect;
 #X obj -7758 434 udpsend;
 #X obj -7679 394 packOSC;
-#X msg -7984 218 connect 127.0.0.1 20000;
 #X obj -7689 16 inlet;
 #X obj -7689 293 packOSC;
 #X msg -7607 306 send /motors \$1 \$2;
-#X connect 0 0 6 0;
-#X connect 1 0 9 0;
+#X msg -7984 218 connect 127.0.0.1 20001;
+#X obj -7592 111 print rightwheel;
+#X connect 0 0 9 0;
+#X connect 1 0 8 0;
 #X connect 2 0 3 0;
 #X connect 3 0 4 0;
 #X connect 5 0 4 0;
-#X connect 6 0 4 0;
-#X connect 7 0 8 0;
-#X connect 8 0 4 0;
-#X connect 9 0 5 0;
+#X connect 6 0 7 0;
+#X connect 6 0 10 0;
+#X connect 7 0 4 0;
+#X connect 8 0 5 0;
+#X connect 9 0 4 0;
 #X restore 91 531 pd RobotControl;
 #X obj 91 509 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -34,163 +35,161 @@
 #X msg 243 479 0 0;
 #X msg 224 426 -63 -45;
 #X text 17 533 [Layer 0];
-#N canvas 921 45 881 606 Circle 0;
-#X obj 30 40 inlet;
-#X obj 757 32 inlet;
-#X obj 260 575 outlet;
-#X floatatom 431 126 10 0 0 0 - - -;
-#X msg 757 163 \$1;
-#X obj 757 100 spigot;
-#X obj 796 70 tgl 15 0 empty empty empty 17 7 0 10 -262144 -1 -1 0
-28;
-#X floatatom 757 132 10 0 0 0 - - -;
-#X obj 431 217 expr $f1 \; $f2 \; if ($f1 >= $f2 - 34 && $f1 <= $f2
-+ 34 \, $f1 \, 1);
-#X obj 673 322 value calculated speed;
-#X floatatom 30 241 10 0 0 0 - - -;
-#X obj 723 100 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj 30 209 expr (63*$f1)/($f1+13);
-#X obj 30 105 textfile;
-#X msg 30 137 \$1;
-#X obj 260 473 spigot;
-#X obj 299 429 tgl 15 0 /motors empty empty 17 7 0 10 -262144 -1 -1
-0 1;
-#X msg 30 272 send /motors 63 \$1;
-#X text 324 428 <-- if not inhibited \, keep controlling;
-#X obj 299 41 inlet;
-#X msg 30 73 read radius.txt \, rewind \, bang;
-#X text 435 6 take initial reading then update every other reading
-;
-#X connect 0 0 20 0;
-#X connect 1 0 5 0;
-#X connect 1 0 3 0;
-#X connect 3 0 8 0;
-#X connect 4 0 8 1;
-#X connect 5 0 7 0;
-#X connect 5 0 11 0;
-#X connect 6 0 5 1;
-#X connect 7 0 4 0;
-#X connect 8 0 7 0;
-#X connect 8 2 9 0;
-#X connect 10 0 17 0;
-#X connect 11 0 6 0;
-#X connect 12 0 10 0;
-#X connect 13 0 14 0;
-#X connect 14 0 12 0;
-#X connect 15 0 2 0;
-#X connect 16 0 15 1;
-#X connect 16 0 20 0;
-#X connect 17 0 15 0;
-#X connect 19 0 16 0;
-#X connect 20 0 13 0;
-#X restore 265 260 pd Circle Motion;
-#N canvas 698 15 1183 886 Avoidance 0;
-#X text -6816 67 Recursive calls to different steps;
-#X obj -7337 843 outlet;
-#X obj -7154 841 outlet;
-#X floatatom -6970 209 5 0 0 0 - - -;
-#X obj -6970 333 expr $f1 \; if ($f1 <= 65 && $f1 > 60 \, $f1 \, 0)
-;
-#X obj -6970 417 expr $f1 \; if ($f1 <= 60 && $f1 > 50 \, $f1 \, 0)
-;
-#X obj -6970 495 expr $f1 \; if ($f1 <= 50 && $f1 > 40 \, $f1 \, 0)
-;
-#X obj -6970 580 expr $f1 \; if ($f1 <= 40 && $f1 >= 35 \, $f1 \, 0)
-;
-#X obj -6970 245 expr $f1 \; if ($f1 <= 75 && $f1 > 65 \, $f1 \, 0)
-;
-#X obj -6735 288 moses 1;
-#X obj -6689 314 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj -6735 376 moses 1;
-#X obj -6689 402 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj -6735 460 moses 1;
-#X obj -6689 486 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj -6735 541 moses 1;
-#X obj -6689 567 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X obj -6728 623 moses 1;
-#X obj -6682 649 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
--1 -1;
-#X msg -6689 335 send /motors 63 40;
-#X msg -6689 423 send /motors 63 35.75;
-#X msg -6689 507 send /motors 63 31.5;
-#X msg -6689 589 send /motors 63 27.25;
-#X msg -6682 670 send /motors 63 23;
-#X obj -6853 749 spigot;
-#X obj -6853 790 print;
-#X obj -6970 640 moses 75;
-#X floatatom -7284 194 5 0 0 0 - - -;
-#X msg -7154 300 1 0;
-#X obj -7154 331 unpack i i;
-#X obj -7284 220 expr $f1 \; if ($f1 > 75 \, 1 \, 2);
-#X obj -7154 269 route 1 2;
-#X msg -7112 300 0 1;
-#X obj -6970 19 inlet;
-#X connect 3 0 8 0;
-#X connect 4 0 5 0;
-#X connect 4 1 11 0;
-#X connect 5 0 6 0;
-#X connect 5 1 13 0;
-#X connect 6 0 7 0;
-#X connect 6 1 15 0;
-#X connect 7 0 26 0;
-#X connect 7 1 17 0;
-#X connect 8 0 4 0;
-#X connect 8 1 9 0;
-#X connect 9 1 10 0;
-#X connect 10 0 19 0;
-#X connect 11 1 12 0;
-#X connect 12 0 20 0;
-#X connect 13 1 14 0;
-#X connect 14 0 21 0;
-#X connect 15 1 16 0;
-#X connect 16 0 22 0;
-#X connect 17 1 18 0;
-#X connect 18 0 23 0;
-#X connect 19 0 24 0;
-#X connect 20 0 24 0;
-#X connect 21 0 24 0;
-#X connect 22 0 24 0;
-#X connect 23 0 24 0;
-#X connect 24 0 25 0;
-#X connect 24 0 1 0;
-#X connect 26 0 24 1;
-#X connect 27 0 30 0;
-#X connect 28 0 29 0;
-#X connect 29 0 2 0;
-#X connect 29 1 24 1;
-#X connect 30 1 31 0;
-#X connect 31 0 28 0;
-#X connect 31 1 32 0;
-#X connect 32 0 29 0;
-#X connect 33 0 27 0;
-#X connect 33 0 3 0;
-#X restore 159 330 pd Avoidance Behaviour;
 #X text -2 329 [Layer 1] maneuver -->;
-#X obj 386 182 unpack i;
-#X text 425 13 Subsumption case study v0.3;
 #X text 397 270 <-- [Layer 2] Drive in circles;
 #X msg 243 452 63 63;
-#X obj 111 182 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+#X obj 268 245 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X text 25 181 Start robot;
-#X obj 234 112 OSCroute /ultrasound /gyro /motor_state;
-#X connect 1 0 21 0;
+#X text 182 244 Start robot;
+#X obj 159 79 OSCroute /ultrasound /gyro /motor_state;
+#N canvas 478 12 754 865 Avoidance_Behaviour 0;
+#X obj -8367 833 outlet;
+#X obj -8297 834 outlet;
+#X floatatom -8113 202 5 0 0 0 - - -;
+#X obj -8113 326 expr $f1 \; if ($f1 <= 65 && $f1 > 60 \, $f1 \, 0)
+;
+#X obj -8113 410 expr $f1 \; if ($f1 <= 60 && $f1 > 50 \, $f1 \, 0)
+;
+#X obj -8113 488 expr $f1 \; if ($f1 <= 50 && $f1 > 40 \, $f1 \, 0)
+;
+#X obj -8113 573 expr $f1 \; if ($f1 <= 40 && $f1 >= 35 \, $f1 \, 0)
+;
+#X obj -8113 238 expr $f1 \; if ($f1 <= 75 && $f1 > 65 \, $f1 \, 0)
+;
+#X obj -7878 281 moses 1;
+#X obj -7832 307 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -7878 369 moses 1;
+#X obj -7832 395 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -7878 453 moses 1;
+#X obj -7832 479 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -7878 534 moses 1;
+#X obj -7832 560 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -7871 616 moses 1;
+#X obj -7825 642 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X msg -7832 328 send /motors 63 40;
+#X obj -7996 742 spigot;
+#X obj -8113 633 moses 75;
+#X floatatom -8427 187 5 0 0 0 - - -;
+#X msg -8297 293 1 0;
+#X obj -8297 324 unpack i i;
+#X obj -8427 213 expr $f1 \; if ($f1 > 75 \, 1 \, 2);
+#X obj -8297 262 route 1 2;
+#X msg -8255 293 0 1;
+#X obj -8113 12 inlet;
+#X msg -7832 416 send /motors 63 35;
+#X msg -7832 500 send /motors 63 35;
+#X msg -7832 582 send /motors 63 30;
+#X msg -7825 663 send /motors 63 25;
+#X obj -8084 90 print Ultrasonic;
+#X connect 2 0 7 0;
+#X connect 3 0 4 0;
+#X connect 3 1 10 0;
+#X connect 4 0 5 0;
+#X connect 4 1 12 0;
+#X connect 5 0 6 0;
+#X connect 5 1 14 0;
+#X connect 6 0 20 0;
+#X connect 6 1 16 0;
+#X connect 7 0 3 0;
+#X connect 7 1 8 0;
+#X connect 8 1 9 0;
+#X connect 9 0 18 0;
+#X connect 10 1 11 0;
+#X connect 11 0 28 0;
+#X connect 12 1 13 0;
+#X connect 13 0 29 0;
+#X connect 14 1 15 0;
+#X connect 15 0 30 0;
+#X connect 16 1 17 0;
+#X connect 17 0 31 0;
+#X connect 18 0 19 0;
+#X connect 19 0 0 0;
+#X connect 20 0 19 1;
+#X connect 21 0 24 0;
+#X connect 22 0 23 0;
+#X connect 23 0 1 0;
+#X connect 23 1 19 1;
+#X connect 24 1 25 0;
+#X connect 25 0 22 0;
+#X connect 25 1 26 0;
+#X connect 26 0 23 0;
+#X connect 27 0 21 0;
+#X connect 27 0 2 0;
+#X connect 27 0 32 0;
+#X connect 28 0 19 0;
+#X connect 29 0 19 0;
+#X connect 30 0 19 0;
+#X connect 31 0 19 0;
+#X restore 159 330 pd Avoidance_Behaviour;
+#N canvas 517 4 947 606 Circle_Motion 0;
+#X obj 30 42 inlet;
+#X obj 304 581 outlet;
+#X floatatom 30 342 10 0 0 0 - - -;
+#X obj 30 232 expr (63*$f1)/($f1+13);
+#X obj 30 105 textfile;
+#X msg 30 137 \$1;
+#X obj 304 551 spigot;
+#X obj 343 507 tgl 15 0 /motors empty empty 17 7 0 10 -262144 -1 -1
+1 1;
+#X msg 30 485 send /motors 63 \$1;
+#X text 368 506 <-- if not inhibited \, keep controlling;
+#X obj 343 39 inlet;
+#X msg 30 73 read radius.txt \, rewind \, bang;
+#X obj 30 294 int;
+#X obj 30 261 + 0.4;
+#X obj 526 41 inlet;
+#X obj 526 76 unpack i i;
+#X obj 51 414 v right_wheel_speed;
+#X obj 426 127 expr $i1 \; $i2 \; if($i1 < 63 || $i2 < right_wheel_speed
+\, 1 \, 0) \; if($i1 > 63 || $i2 > right_wheel_speed \, 1 \, 0);
+#X obj 113 293 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X text 517 234 An expression to handle motor readings. right now it
+feels redundant since layer 1 is supressing layer 2 and making sure
+it resumes after supression is over;
+#X text 79 46 reading the radius from textfile;
+#X text 42 165 calculate relative speed required for right wheel only
+\, left is static but could be changed through using the other formula
+for the left wheel;
+#X connect 0 0 11 0;
+#X connect 2 0 8 0;
+#X connect 2 0 16 0;
 #X connect 3 0 13 0;
-#X connect 6 0 5 0;
-#X connect 7 0 5 1;
-#X connect 9 0 5 3;
-#X connect 10 0 5 3;
-#X connect 12 0 5 2;
-#X connect 13 0 5 2;
-#X connect 13 1 12 1;
-#X connect 15 0 12 2;
-#X connect 18 0 5 3;
-#X connect 19 0 12 0;
-#X connect 21 0 3 0;
-#X connect 21 1 4 0;
-#X connect 21 2 15 0;
+#X connect 4 0 5 0;
+#X connect 5 0 3 0;
+#X connect 6 0 1 0;
+#X connect 7 0 6 1;
+#X connect 7 0 18 0;
+#X connect 8 0 6 0;
+#X connect 10 0 7 0;
+#X connect 11 0 4 0;
+#X connect 12 0 2 0;
+#X connect 13 0 12 0;
+#X connect 14 0 15 0;
+#X connect 15 0 17 0;
+#X connect 15 1 17 1;
+#X connect 17 2 18 0;
+#X connect 17 3 18 0;
+#X connect 18 0 2 0;
+#X restore 268 268 pd Circle_Motion;
+#X msg 387 209 62 48;
+#X text 419 -1 Subsumption case study v1.0;
+#X connect 1 0 16 0;
+#X connect 3 0 17 0;
+#X connect 5 0 4 0;
+#X connect 6 0 4 1;
+#X connect 8 0 4 3;
+#X connect 9 0 4 3;
+#X connect 13 0 4 3;
+#X connect 14 0 18 0;
+#X connect 16 0 3 0;
+#X connect 16 2 18 2;
+#X connect 17 0 4 2;
+#X connect 17 1 18 1;
+#X connect 18 0 4 2;
+#X connect 19 0 18 2;

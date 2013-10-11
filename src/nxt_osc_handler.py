@@ -12,7 +12,7 @@ from simpleOSC import initOSCClient, initOSCServer, setOSCHandler, \
     startOSCServer, sendOSCMsg, closeOSC
 
 
-class Motor_Control(object):
+class MotorControl(object):
     nxt_obj = 0
     m_left = []
     m_right = []
@@ -50,13 +50,13 @@ def shutdown(pl):
 
 if __name__ == '__main__':
     b = nxt.locator.find_one_brick()
-    controls = Motor_Control(b)
+    controls = MotorControl(b)
 
     # takes args : ip, port
     initOSCClient()
 
     # takes args : ip, port, mode --> 0 for basic server, 1 for threading server, 2 for forking server
-    initOSCServer(ip='127.0.0.1', port=20000, mode=1)
+    initOSCServer(ip='127.0.0.1', port=20001, mode=1)
 
     # bind addresses to functions
     setOSCHandler('/motors', controls.motor_osc_handler)
