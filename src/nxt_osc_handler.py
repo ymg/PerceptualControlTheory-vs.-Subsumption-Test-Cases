@@ -43,10 +43,12 @@ def sensor_broadcast(Control_Object):
         time.sleep(0.10)  # 10 ms
 
 
+# Not in use
 def shutdown(pl):
     input("Press any key to close OSC server")
     closeOSC()
     pl.terminate()
+
 
 if __name__ == '__main__':
     b = nxt.locator.find_one_brick()
@@ -56,7 +58,7 @@ if __name__ == '__main__':
     initOSCClient()
 
     # takes args : ip, port, mode --> 0 for basic server, 1 for threading server, 2 for forking server
-    initOSCServer(ip='127.0.0.1', port=20001, mode=1)
+    initOSCServer(ip='127.0.0.1', port=20002, mode=1)
 
     # bind addresses to functions
     setOSCHandler('/motors', controls.motor_osc_handler)

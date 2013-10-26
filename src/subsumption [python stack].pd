@@ -14,18 +14,18 @@
 #X obj -7689 16 inlet;
 #X obj -7689 293 packOSC;
 #X msg -7607 306 send /motors \$1 \$2;
-#X msg -7984 218 connect 127.0.0.1 20001;
 #X obj -7592 111 print rightwheel;
-#X connect 0 0 9 0;
+#X msg -7984 218 connect 127.0.0.1 20002;
+#X connect 0 0 10 0;
 #X connect 1 0 8 0;
 #X connect 2 0 3 0;
 #X connect 3 0 4 0;
 #X connect 5 0 4 0;
 #X connect 6 0 7 0;
-#X connect 6 0 10 0;
+#X connect 6 0 9 0;
 #X connect 7 0 4 0;
 #X connect 8 0 5 0;
-#X connect 9 0 4 0;
+#X connect 10 0 4 0;
 #X restore 91 531 pd RobotControl;
 #X obj 91 509 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144 -1
 -1;
@@ -126,7 +126,7 @@
 #X connect 30 0 19 0;
 #X connect 31 0 19 0;
 #X restore 159 330 pd Avoidance_Behaviour;
-#N canvas 517 4 947 606 Circle_Motion 0;
+#N canvas 517 4 994 606 Circle_Motion 0;
 #X obj 30 42 inlet;
 #X obj 304 581 outlet;
 #X floatatom 30 342 10 0 0 0 - - -;
@@ -142,14 +142,14 @@
 #X msg 30 73 read radius.txt \, rewind \, bang;
 #X obj 30 294 int;
 #X obj 30 261 + 0.4;
-#X obj 526 41 inlet;
-#X obj 526 76 unpack i i;
+#X obj 583 22 inlet;
+#X obj 583 57 unpack i i;
 #X obj 51 414 v right_wheel_speed;
-#X obj 426 127 expr $i1 \; $i2 \; if($i1 < 63 || $i2 < right_wheel_speed
+#X obj 483 108 expr $i1 \; $i2 \; if($i1 < 63 || $i2 < right_wheel_speed
 \, 1 \, 0) \; if($i1 > 63 || $i2 > right_wheel_speed \, 1 \, 0);
 #X obj 113 293 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X text 517 234 An expression to handle motor readings. right now it
+#X text 574 215 An expression to handle motor readings. right now it
 feels redundant since layer 1 is supressing layer 2 and making sure
 it resumes after supression is over;
 #X text 79 46 reading the radius from textfile;
@@ -173,11 +173,8 @@ for the left wheel;
 #X connect 14 0 15 0;
 #X connect 15 0 17 0;
 #X connect 15 1 17 1;
-#X connect 17 2 18 0;
-#X connect 17 3 18 0;
 #X connect 18 0 2 0;
 #X restore 268 268 pd Circle_Motion;
-#X msg 387 209 62 48;
 #X text 419 -1 Subsumption case study v1.0;
 #X connect 1 0 16 0;
 #X connect 3 0 17 0;
@@ -192,4 +189,3 @@ for the left wheel;
 #X connect 17 0 4 2;
 #X connect 17 1 18 1;
 #X connect 18 0 4 2;
-#X connect 19 0 18 2;

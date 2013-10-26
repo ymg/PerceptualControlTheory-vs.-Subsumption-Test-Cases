@@ -1,10 +1,10 @@
-#N canvas 1183 7 713 776 12;
+#N canvas 1183 5 713 776 12;
 #X declare -lib mrpeach;
 #X obj 14 14 import mrpeach;
 #X obj 234 14 dumpOSC 9000;
 #X obj 127 14 OSC;
 #X obj 234 102 unpack i;
-#N canvas 557 8 746 524 RobotControl 0;
+#N canvas 405 18 746 524 RobotControl 0;
 #X obj -7855 16 inlet;
 #X obj -7255 11 inlet;
 #X obj -7746 16 inlet;
@@ -18,26 +18,32 @@
 #X obj -7657 15 inlet;
 #X msg -7597 346 send /motors \$1 \$2;
 #X obj -7663 320 print;
-#X obj -7366 11 inlet;
-#X obj -7366 53 unpack;
-#X msg -7855 258 connect 127.0.0.1 20001;
 #X obj -7487 129 expr $i1 + right_wheel;
 #X obj -7656 132 expr $i1 + left_wheel;
-#X connect 0 0 15 0;
+#X obj -7515 255 print ultrasonic;
+#X obj -7515 229 v ultrasnic_readings;
+#X obj -7515 208 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
+-1 -1;
+#X obj -7418 198 print Rwheel;
+#X msg -7855 258 connect 127.0.0.1 20002;
+#X connect 0 0 19 0;
 #X connect 1 0 8 0;
 #X connect 2 0 3 0;
 #X connect 3 0 4 0;
 #X connect 5 0 4 0;
-#X connect 6 0 16 0;
+#X connect 6 0 13 0;
 #X connect 7 0 4 0;
 #X connect 8 0 5 0;
 #X connect 9 0 11 0;
-#X connect 10 0 17 0;
+#X connect 10 0 14 0;
 #X connect 11 0 7 0;
-#X connect 13 0 14 0;
-#X connect 15 0 4 0;
-#X connect 16 0 9 1;
-#X connect 17 0 9 0;
+#X connect 13 0 9 1;
+#X connect 13 0 17 0;
+#X connect 13 0 18 0;
+#X connect 14 0 9 0;
+#X connect 16 0 15 0;
+#X connect 17 0 16 0;
+#X connect 19 0 4 0;
 #X restore 317 731 pd RobotControl;
 #X obj 297 695 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
@@ -109,9 +115,9 @@
 #X connect 26 0 25 0;
 #X connect 26 1 24 0;
 #X restore 414 364 pd Circle_Motion;
-#N canvas 464 14 949 785 Avoidance_Behaviour 0;
+#N canvas 464 14 949 821 Avoidance_Behaviour 0;
 #X obj -6387 754 outlet;
-#X floatatom -6872 59 10 0 0 0 - - -;
+#X floatatom -6869 34 10 0 0 0 - - -;
 #X obj -6917 155 expr $f1 \; if ($f1 <= 65 && $f1 > 60 \, $f1 \, 0)
 ;
 #X obj -6961 226 expr $f1 \; if ($f1 <= 60 && $f1 > 50 \, $f1 \, 0)
@@ -137,7 +143,7 @@
 #X obj -6782 398 moses 1;
 #X obj -6736 425 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -7025 6 inlet;
+#X obj -7025 -34 inlet;
 #X obj -6475 406 unpack;
 #X obj -6188 20 inlet;
 #X obj -6188 490 unpack;
@@ -151,7 +157,7 @@
 #X msg -6713 383 63 30;
 #X msg -6736 449 63 25;
 #X obj -6387 573 expr $i1 \; $i2 \; $i1 - left_wheel;
-#X obj -6473 144 print ultrasonic;
+#X obj -6869 57 v ultrasnic_readings;
 #X connect 1 0 31 0;
 #X connect 2 1 9 0;
 #X connect 3 1 11 0;
@@ -218,10 +224,8 @@
 #X msg -6422 194 800;
 #X obj -6912 545 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -6792 609 print RWheel_minus;
 #X obj -6321 540 bng 15 250 50 0 empty empty empty 17 7 0 10 -262144
 -1 -1;
-#X obj -6222 610 print RWheel_plus;
 #X obj -6817 99 t b b;
 #X obj -6436 420 v right_reorganisation_reference;
 #X obj -6222 579 v right_reorganisation_reference;
@@ -232,7 +236,7 @@
 #X obj -6384 454 expr $i1 \; $i2 \; if ($i1 < $i2 \, $i1 + 1 \, 0)
 ;
 #X connect 0 0 7 0;
-#X connect 0 0 27 0;
+#X connect 0 0 25 0;
 #X connect 2 0 3 0;
 #X connect 3 0 5 0;
 #X connect 3 1 5 1;
@@ -242,15 +246,15 @@
 #X connect 7 0 1 0;
 #X connect 7 1 4 0;
 #X connect 8 0 11 0;
-#X connect 8 1 31 0;
-#X connect 9 0 28 0;
+#X connect 8 1 29 0;
+#X connect 9 0 26 0;
 #X connect 9 1 10 0;
-#X connect 10 0 33 1;
-#X connect 11 0 32 0;
+#X connect 10 0 31 1;
+#X connect 11 0 30 0;
 #X connect 12 1 15 0;
 #X connect 13 1 14 0;
-#X connect 14 0 29 0;
-#X connect 15 0 30 0;
+#X connect 14 0 27 0;
+#X connect 15 0 28 0;
 #X connect 16 0 6 1;
 #X connect 17 0 16 0;
 #X connect 18 0 19 0;
@@ -259,18 +263,16 @@
 #X connect 20 0 17 0;
 #X connect 21 0 17 0;
 #X connect 22 0 19 1;
-#X connect 23 0 30 0;
-#X connect 25 0 29 0;
-#X connect 27 0 8 0;
-#X connect 27 1 18 0;
-#X connect 28 0 33 0;
-#X connect 29 0 26 0;
-#X connect 30 0 24 0;
-#X connect 31 0 32 1;
-#X connect 32 0 23 0;
-#X connect 32 2 12 0;
-#X connect 33 0 25 0;
-#X connect 33 2 13 0;
+#X connect 23 0 28 0;
+#X connect 24 0 27 0;
+#X connect 25 0 8 0;
+#X connect 25 1 18 0;
+#X connect 26 0 31 0;
+#X connect 29 0 30 1;
+#X connect 30 0 23 0;
+#X connect 30 2 12 0;
+#X connect 31 0 24 0;
+#X connect 31 2 13 0;
 #X restore 234 535 pd systems_reorganisation;
 #X obj 444 166 v left_wheel;
 #X obj 444 107 unpack;
@@ -302,14 +304,13 @@
 #X connect 15 1 4 3;
 #X connect 17 0 16 0;
 #X connect 17 1 24 0;
-#X connect 19 0 4 5;
-#X connect 20 0 4 5;
+#X connect 19 0 4 4;
+#X connect 20 0 4 4;
 #X connect 23 0 27 0;
-#X connect 25 0 4 5;
+#X connect 25 0 4 4;
 #X connect 27 0 28 0;
 #X connect 28 0 17 0;
 #X connect 28 0 13 0;
-#X connect 28 0 4 4;
 #X connect 28 0 14 1;
 #X connect 29 0 13 0;
 #X connect 29 0 14 1;
