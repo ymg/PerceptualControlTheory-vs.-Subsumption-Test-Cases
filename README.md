@@ -1,4 +1,4 @@
-#HPCT & Subsumption project
+#HPCT vs. Subsumption Testing scenarios
 
 A project to implement HPCT and Subsumption demos using PureData 
 
